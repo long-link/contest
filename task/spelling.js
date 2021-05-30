@@ -19,7 +19,6 @@ class Spelling{
         let lastWord, partStr
         do {    // если будет время переделать
                 // разбиваю символы по частям не длиней 10000(+ разбиение по ласт слову)
-                // upd: не подумал что столько сиволов не влезет в переменную)0)
             lastWord = processedText.indexOf('+', maxLen)
             partStr = processedText.substring(lastWord)
             textArr.push(partStr)
