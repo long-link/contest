@@ -16,12 +16,11 @@ class Spelling{
         const maxLen = 10000
         let textArr = []
         let textLength = processedText.length
-        let lastWord, partStr
+        let lastWord
         do {    // если будет время переделать
                 // разбиваю символы по частям не длиней 10000(+ разбиение по ласт слову)
-            lastWord = processedText.indexOf('+', maxLen)
-            partStr = processedText.substring(lastWord)
-            textArr.push(partStr)
+            lastWord = processedText.lastIndexOf('+', maxLen) + 1
+            textArr.push(processedText.substring(0, lastWord))
             processedText = processedText.slice(lastWord)
             textLength -= lastWord
         } while (textLength > maxLen)
@@ -50,8 +49,8 @@ class Spelling{
     async checkCountError() {
         let textURL = this.toSendFormat()
         let currentCountError = 0
-        for (let i = 0; i < textURL.length; i++) {
-            currentCountError += await this.sendText(textURL[i])
+        for (const item of textURL) {
+            currentCountError += await this.sendText(item)
         }
         return this.errorCounter(currentCountError)
     }
